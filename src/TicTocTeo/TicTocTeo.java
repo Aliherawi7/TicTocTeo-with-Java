@@ -7,10 +7,7 @@ import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JApplet;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 class TicTacTeo extends JFrame{
@@ -20,22 +17,25 @@ class TicTacTeo extends JFrame{
     private JLabel jlbStatus = new JLabel("x's turn  to play");
 
     public TicTacTeo() {
-        JPanel p = new JPanel(new GridLayout(3,3,0,0));
+        JPanel playArea = new JPanel(new GridLayout(4,3,0,0));
+        playArea.setSize(400,300);
+        jlbStatus.setHorizontalTextPosition(SwingConstants.CENTER);
         for(int i =0; i<3; i++)
             for(int j=0; j<3; j++)
-                p.add(cells[i][j] = new Cell());
+                playArea.add(cells[i][j] = new Cell());
 
-        p.setBorder(new LineBorder(Color.red, 2));
-        add(jlbStatus, BorderLayout.SOUTH);
+        playArea.setBorder(new LineBorder(Color.red, 2));
+        playArea.add(jlbStatus);
 
         // JFrame setup
-        setSize(400,400);
-        add(p);
+        setSize(400,450);
+        add(playArea);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
     }
 
+    //check if cells are full
     public boolean isFull() {
         for(int i=0; i<3; i++)
             for(int j=0; j<3; j++)
@@ -45,6 +45,7 @@ class TicTacTeo extends JFrame{
         return true;
     }
 
+    // check who is the winner
     public boolean isWon(char token) {
         for(int i=0; i<3; i++)
             if((cells[i][0].getToken() == token) &&
