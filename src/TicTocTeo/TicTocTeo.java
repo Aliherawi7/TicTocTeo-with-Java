@@ -26,7 +26,6 @@ class TicTacTeo extends JFrame{
 
         playArea.setBorder(new LineBorder(Color.red, 2));
         playArea.add(jlbStatus);
-
         // JFrame setup
         setSize(400,450);
         add(playArea);
@@ -44,7 +43,6 @@ class TicTacTeo extends JFrame{
 
         return true;
     }
-
     // check who is the winner
     public boolean isWon(char token) {
         for(int i=0; i<3; i++)
@@ -52,7 +50,6 @@ class TicTacTeo extends JFrame{
                     (cells[i][1].getToken() == token) &&
                     (cells[i][2].getToken() == token))
                 return true;
-
         for(int j =0; j<3; j++)
             if((cells[0][j].getToken() == token) &&
                     (cells[1][j].getToken() == token)&&
@@ -105,7 +102,6 @@ class TicTacTeo extends JFrame{
 
             }
         }
-
         private class MyMouseListener extends MouseAdapter{
             public void mouseClicked(MouseEvent e) {
                 if(token == ' ' && whoseTurn != ' ') {
@@ -113,9 +109,12 @@ class TicTacTeo extends JFrame{
 
                     if(isWon(whoseTurn)) {
                         jlbStatus.setText(whoseTurn +" won! game is over");
+                        JOptionPane.showMessageDialog(null, whoseTurn +" won! game is over");
                         whoseTurn = ' ';//the game is over
+
                     }else if(isFull()) {
                         jlbStatus.setText("draw! game is Over");
+                        JOptionPane.showMessageDialog(null, "draw! game is Over");
                     }else {
                         whoseTurn = (whoseTurn == 'X')? 'O':'X';
                         jlbStatus.setText(whoseTurn + " is turn");
